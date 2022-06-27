@@ -9,6 +9,7 @@ import { CepserviceService } from 'src/app/services/cepservice.service';
   styleUrls: ['./form.component.css']
 })
 
+
 export class FormComponent implements OnInit {
   public contatos: any[] = [];
   public form: FormGroup;
@@ -34,7 +35,9 @@ export class FormComponent implements OnInit {
       bairro: [''],
       cidade: [''],
       telefone: ['', Validators.required],
-      email: ['', Validators.required],
+      email: ['', Validators.compose([
+        Validators.required, 
+        Validators.email])],
     })
   }
 
@@ -45,14 +48,22 @@ export class FormComponent implements OnInit {
   }
 
 populaForm(dados:any) {
-    console.log(dados)
+
+    console.log(dados);
+    let dadosRecebidos = dados;
+    if (dadosRecebidos.hasOwnProperty('erro') === true) {
+      this.form.patchValue({
+      logradouro: 'O CEP informado é inválido',    
+      bairro: 'Digite um CEP válido'    
+      }) 
+    } else {
+
     this.form.patchValue({
       cep: dados.cep,
       logradouro: dados.logradouro,
       bairro: dados.bairro,
       cidade: dados.localidade,
-
-    }) 
+    })}
   } 
 
   ngOnInit(): void {   
