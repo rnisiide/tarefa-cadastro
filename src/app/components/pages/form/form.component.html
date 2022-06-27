@@ -1,0 +1,184 @@
+ <div class="container my-3">
+    <div>
+      <h1 class="h1">Inserir novo contato</h1>
+    </div>
+          <div class="formwrapper my-3">
+            <form id="formulario" (ngSubmit)="submit()" [formGroup]="form" #formDir="ngForm">
+              
+              <fieldset class="row mb-3">
+                <legend class="col-form-label col-sm-3 pt-0">Tipo de documento</legend>
+                <div class="col-sm-9">
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="documento" id="gridRadios1" value="CPF" formControlName="documento">
+                    <label class="form-check-label" for="documento1">
+                      CPF
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="documento" id="gridRadios2" value="CNPJ" formControlName="documento">
+                    <label class="form-check-label" for="documento2">
+                      CNPJ
+                    </label>
+                  </div>
+                </div>
+              </fieldset>
+              <div class="row mb-3">
+                <label
+                  for="numDoc"
+                  class="col-sm-3 col-form-label"
+                  [ngClass]="{'text-danger' : form.controls['numDoc'].invalid && formDir.submitted}">
+                  Número de documento
+                  <span *ngIf="form.controls['numDoc'].invalid && formDir.submitted"> * </span>
+                </label>
+                <div class="col-sm-9 dangerinput">
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="numDoc"
+                    name="numDoc"
+                    formControlName="numDoc"
+                    required>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label for="nome"
+                class="col-sm-3 col-form-label"
+                [ngClass]="{'text-danger' : form.controls['nome'].invalid && formDir.submitted}">
+                Nome / Razão Social
+                <span *ngIf="form.controls['nome'].invalid && formDir.submitted"> * </span>
+                </label>
+                <div class="col-sm-9">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="nome"
+                    name="nome"
+                    formControlName="nome"
+                    required>
+                </div>
+              </div>
+              <div class="row mb-3" *ngIf="form.controls['documento'].value == 'CNPJ'">
+                 <label for="nomefantasia" class="col-sm-3 col-form-label">Nome Fantasia</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" id="nomefantasia" name="nomefantasia" formControlName="nomefantasia">
+                </div>
+                </div>
+                <div class="row mb-3">
+                  <label
+                    for="cep"
+                    class="col-sm-3 col-form-label"
+                    [ngClass]="{'text-danger' : form.controls['cep'].invalid && formDir.submitted}">
+                    CEP
+                    <span *ngIf="form.controls['cep'].invalid && formDir.submitted"> * </span>
+                  </label>
+                  <div class="col-sm-9">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="cep"
+                      name="cep"
+                      formControlName="cep"
+                      (blur)="consultaCep($event, formDir)"
+                      required>
+                  </div>
+                </div>
+                <div class="row mb-3 text-black-50">
+                  <label for="logradouro" class="col-sm-3 col-form-label">Endereço</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="logradouro" formControlName="logradouro" [attr.disabled]="true">
+                  </div>
+                </div>
+                <div class="row mb-3 text-black-50">
+                  <label for="logradouro" class="col-sm-3 col-form-label">Bairro</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="bairro" formControlName="bairro" [attr.disabled]="true">
+                  </div>
+                </div>
+                <div class="row mb-3 text-black-50">
+                  <label for="cidade" class="col-sm-3 col-form-label">Cidade</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="cidade" formControlName="cidade" [attr.disabled]="true">
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label
+                    for="telefone"
+                    class="col-sm-3 col-form-label"
+                    [ngClass]="{'text-danger' : form.controls['telefone'].invalid && formDir.submitted}">
+                    Telefone
+                    <span *ngIf="form.controls['telefone'].invalid  && formDir.submitted"> * </span>
+                  </label>
+                  <div class="col-sm-9">
+                    <input type="number"
+                    class="form-control"
+                    id="telefone"
+                    name="telefone"
+                    formControlName="telefone"
+                    required>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label
+                    for="email"
+                    class="col-sm-3 col-form-label"
+                    [ngClass]="{'text-danger' : form.controls['email'].invalid  && formDir.submitted}">
+                    E-mail
+                    <span *ngIf="form.controls['email'].invalid  && formDir.submitted"> * </span>
+                  </label>
+                  <div class="col-sm-9">
+                    <input
+                      type="email"
+                      class="form-control"
+                      id="email"
+                      name="email"
+                      formControlName="email"
+                      placeholder=""
+                      required>
+                  </div>
+                </div>
+                <div>
+                    <input
+                      type="submit"
+                      id="inputbtn"
+                      class="btn btn-primary"
+                      value="Cadastrar"
+                      >                 
+                </div>
+              </form>
+          </div>
+</div>
+
+
+<!-- [ngClass]="{'text-danger' : form.controls['cep'].invalid && formDir.submitted}">
+CEP
+<span *ngIf="form.controls['cep'].invalid && formDir.submitted"> * </span> -->
+
+<!-- 
+
+  data-bs-toggle="modal" 
+                      data-bs-target="#exampleModal"
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+
+        <li class="nav-item">
+          <a class="btn btn-primary"  routerLink="/" data-bs-dismiss="modal">Abrir lista</a>
+        </li>
+        <li class="nav-item">
+          <a class="btn btn-primary" routerLink="/newcontact" data-bs-dismiss="modal">Adicionar contato</a>
+        </li>
+      </div>
+    </div>
+  </div>
+</div> -->

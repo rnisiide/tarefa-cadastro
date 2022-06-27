@@ -1,0 +1,39 @@
+nav {
+    background-color:  #d7d7d7;
+    display: flex;
+    justify-content: space-around;
+    border-bottom: 1px solid #777;
+}
+
+
+h1 {
+    padding: 10px;
+    color:  white;
+}
+
+ul {
+    display: flex;
+    align-items: flex-end;
+}
+
+li {
+    list-style: none;
+    padding: 1em;
+}
+
+a {
+    transition: 0.4s;
+    color:  rgb(0, 113, 173);
+    text-decoration: none;
+}
+
+
+a:visited {
+    color:  rgb(0, 113, 173);
+    text-decoration: none;
+}
+
+a:hover {
+    color: rgb(255, 230, 0);
+
+}
